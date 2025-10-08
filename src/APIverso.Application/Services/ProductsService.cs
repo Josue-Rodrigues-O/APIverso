@@ -12,7 +12,7 @@ namespace APIverso.Application.Services
             return productsRepository.GetAll();
         }
 
-        public Product GetById(Guid id)
+        public Product? GetById(Guid id)
         {
             return productsRepository.GetById(id);
         }

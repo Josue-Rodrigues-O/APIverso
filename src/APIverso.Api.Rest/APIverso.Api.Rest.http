@@ -1,0 +1,6 @@
+@APIverso.Api.Rest_HostAddress = http://localhost:5063
+
+GET {{APIverso.Api.Rest_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
