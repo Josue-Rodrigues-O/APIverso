@@ -1,8 +1,8 @@
 ﻿namespace APIverso.Application.Dtos
 {
-    public class ProductDto
+    public class ProductDto(string descricao, decimal preco)
     {
-        public string Descricao { get; set; } = string.Empty;
-        public decimal Preco { get; set; }
+        public string Descricao { get; set; } = descricao ?? string.Empty;
+        public decimal Preco { get; set; } = preco;
     }
 }

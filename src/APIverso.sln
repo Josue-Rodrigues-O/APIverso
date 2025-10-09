@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APIverso.Application", "API
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APIverso.Api.Rest", "APIverso.Api.Rest\APIverso.Api.Rest.csproj", "{D6EA3785-803F-4515-A1C6-9BFB7B8D5338}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APIverso.Api.Grpc", "APIverso.Api.Grpc\APIverso.Api.Grpc.csproj", "{95C497DE-946E-4367-BB70-D4372CFBAD6E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APIverso.Api.Grpc.Contracts", "APIverso.Api.Grpc.Contracts\APIverso.Api.Grpc.Contracts.csproj", "{D83BF455-D9EE-48DB-A37C-D6C3D2AC6A1F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{D6EA3785-803F-4515-A1C6-9BFB7B8D5338}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D6EA3785-803F-4515-A1C6-9BFB7B8D5338}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D6EA3785-803F-4515-A1C6-9BFB7B8D5338}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95C497DE-946E-4367-BB70-D4372CFBAD6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95C497DE-946E-4367-BB70-D4372CFBAD6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95C497DE-946E-4367-BB70-D4372CFBAD6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95C497DE-946E-4367-BB70-D4372CFBAD6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D83BF455-D9EE-48DB-A37C-D6C3D2AC6A1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D83BF455-D9EE-48DB-A37C-D6C3D2AC6A1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D83BF455-D9EE-48DB-A37C-D6C3D2AC6A1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D83BF455-D9EE-48DB-A37C-D6C3D2AC6A1F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

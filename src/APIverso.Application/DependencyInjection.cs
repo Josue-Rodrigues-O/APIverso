@@ -8,7 +8,7 @@ namespace APIverso.Api.Rest
     {
         public static void ConfigureApplicationServices(this IServiceCollection services)
         {
-            services.AddScoped<IProductsRepository, ProductsRepositorySingleton>();
+            services.AddSingleton<IProductsRepository, ProductsRepositorySingleton>();
         }
     }
 }

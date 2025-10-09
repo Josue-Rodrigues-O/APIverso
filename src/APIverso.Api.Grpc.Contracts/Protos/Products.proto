@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+option csharp_namespace = "APIverso.Grpc.Products";
+
+// Serviço que representa o ProductsController
+service ProductsGrpcService {
+  rpc GetAll (Empty) returns (ProductsListResponse);
+  rpc GetById (GetByIdRequest) returns (ProductResponse);
+  rpc Create (CreateProductRequest) returns (ProductResponse);
+  rpc Update (UpdateProductRequest) returns (Empty);
+  rpc Delete (DeleteProductRequest) returns (Empty);
+}
+
+// Mensagens
+
+message Empty {}
+
+message ProductGrpc {
+  string id = 1;
+  string description = 2;
+  double price = 3;
+}
+
+message ProductDtoGrpc {
+  string description = 1;
+  double price = 2;
+}
+
+message GetByIdRequest {
+  string id = 1;
+}
+
+message CreateProductRequest {
+  ProductDtoGrpc productDtoGrpc = 1;
+}
+
+message UpdateProductRequest {
+  ProductGrpc productGrpc = 1;
+}
+
+message DeleteProductRequest {
+  string id = 1;
+}
+
+message ProductResponse {
+  ProductGrpc productGrpc = 1;
+}
+
+message ProductsListResponse {
+  repeated ProductGrpc productsGrpc = 1;
+}
