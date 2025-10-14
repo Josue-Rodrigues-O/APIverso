@@ -1,3 +1,5 @@
+using APIverso.Api.Rest.Middlewares;
+
 namespace APIverso.Api.Rest
 {
     public class Program
@@ -6,22 +8,15 @@ namespace APIverso.Api.Rest
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-
             builder.Services.AddControllers();
-            builder.Services.ConfigureRestServices();
+            builder.Services.ConfigureServices();
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
-
+            app.UseMiddleware<ExceptionHandlingMiddleware>();
             app.UseHttpsRedirection();
-
             app.UseAuthorization();
-
-
             app.MapControllers();
-
             app.Run();
         }
     }
