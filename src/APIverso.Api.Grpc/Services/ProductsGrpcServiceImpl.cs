@@ -1,6 +1,8 @@
 using APIverso.Api.Grpc.Extensions;
 using APIverso.Application.Services;
+using APIverso.Domain.Exceptions;
 using APIverso.Grpc.Products;
+using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 
 namespace APIverso.Api.Grpc.Services
@@ -9,36 +11,59 @@ namespace APIverso.Api.Grpc.Services
     {
         public override Task<ProductsListResponse> GetAll(Empty request, ServerCallContext context)
         {
-            var products = productsService.GetAll().ToProductsListResponse();
+            var result = productsService.GetAll();
+
+            if (result.IsFailure)
+                throw new DomainFailureException(result.Failure!);
+
+            var products = result.Success!.ToProductsListResponse();
             return Task.FromResult(products);
         }
 
         public override Task<ProductResponse> GetById(GetByIdRequest request, ServerCallContext context)
         {
             var id = request.ToGuid();
-            var product = productsService.GetById(id) ??
-                throw new RpcException(new Status(StatusCode.NotFound, "Produto não encontrado"));
+            var result = productsService.GetById(id);
 
-            return Task.FromResult(product.ToProductResponse());
+            if (result.IsFailure)
+                throw new DomainFailureException(result.Failure!);
+
+            var product = result.Success!.ToProductResponse();
+            return Task.FromResult(product);
         }
 
         public override Task<ProductResponse> Create(CreateProductRequest request, ServerCallContext context)
         {
-            var product = productsService.Create(request.ToProductDto());
-            return Task.FromResult(product.ToProductResponse());
+            var result = productsService.Create(request.ToProductDto());
+
+            if (result.IsFailure)
+                throw new DomainFailureException(result.Failure!);
+
+            var product = result.Success!.ToProductResponse();
+            return Task.FromResult(product);
         }
 
-        public override Task<Empty> Update(UpdateProductRequest request, ServerCallContext context)
+        public override Task<ProductResponse> Update(UpdateProductRequest request, ServerCallContext context)
         {
-            productsService.Update(request.ToProduct());
-            return Task.FromResult(new Empty());
+            var result = productsService.Update(request.ToProduct());
+
+            if (result.IsFailure)
+                throw new DomainFailureException(result.Failure!);
+
+            var product = result.Success!.ToProductResponse();
+            return Task.FromResult(product);
         }
 
-        public override Task<Empty> Delete(DeleteProductRequest request, ServerCallContext context)
+        public override Task<ProductResponse> Delete(DeleteProductRequest request, ServerCallContext context)
         {
             var id = request.ToGuid();
-            productsService.Delete(id);
-            return Task.FromResult(new Empty());
+            var result = productsService.Delete(id);
+
+            if (result.IsFailure)
+                throw new DomainFailureException(result.Failure!);
+
+            var product = result.Success!.ToProductResponse();
+            return Task.FromResult(product);
         }
     }
 }

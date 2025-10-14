@@ -32,7 +32,7 @@ namespace APIverso.Api.Grpc.Extensions
                 }
             };
         }
-
+        
         public static ProductDto ToProductDto(this CreateProductRequest createProductRequest)
         {
             return new ProductDto(createProductRequest.ProductDtoGrpc.Description, (decimal)createProductRequest.ProductDtoGrpc.Price);
