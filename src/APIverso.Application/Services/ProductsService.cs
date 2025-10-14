@@ -7,29 +7,29 @@ namespace APIverso.Application.Services
 {
     public class ProductsService(IProductsRepository productsRepository)
     {
-        public IEnumerable<Product> GetAll()
+        public Result<IEnumerable<Product>> GetAll()
         {
             return productsRepository.GetAll();
         }
 
-        public Product? GetById(Guid id)
+        public Result<Product> GetById(Guid id)
         {
             return productsRepository.GetById(id);
         }
 
-        public Product Create(ProductDto produtoDto)
+        public Result<Product> Create(ProductDto produtoDto)
         {
             return productsRepository.Create(produtoDto.ToProduct());
         }
 
-        public void Update(Product updatedProduct)
+        public Result<Product> Update(Product updatedProduct)
         {
-            productsRepository.Update(updatedProduct);
+            return productsRepository.Update(updatedProduct);
         }
 
-        public void Delete(Guid id)
+        public Result<Product> Delete(Guid id)
         {
-            productsRepository.Delete(id);
+            return productsRepository.Delete(id);
         }
     }
 }

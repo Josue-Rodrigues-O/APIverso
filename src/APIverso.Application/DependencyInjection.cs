@@ -2,13 +2,14 @@
 using APIverso.Infrastructure.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace APIverso.Api.Rest
+namespace APIverso.Application
 {
     public static class DependencyInjection
     {
-        public static void ConfigureApplicationServices(this IServiceCollection services)
+        public static IServiceCollection ConfigureApplicationServices(this IServiceCollection services)
         {
             services.AddSingleton<IProductsRepository, ProductsRepositorySingleton>();
+            return services;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using APIverso.Domain.Interfaces;
+﻿using APIverso.Domain.Enums;
+using APIverso.Domain.Interfaces;
 using APIverso.Domain.Models;
 
 namespace APIverso.Infrastructure.Repositories
@@ -12,34 +13,43 @@ namespace APIverso.Infrastructure.Repositories
             new("Manga", 7.99M),
         };
 
-        public IEnumerable<Product> GetAll()
+        public Result<IEnumerable<Product>> GetAll()
         {
-            return _products;
+            return Result<IEnumerable<Product>>.AsSuccess(_products);
         }
 
-        public Product? GetById(Guid id)
+        public Result<Product> GetById(Guid id)
         {
-            return _products.FirstOrDefault(p => p.Id == id);
+            Product? product = _products.FirstOrDefault(p => p.Id == id);
+            if (product == null)
+                return Result<Product>.AsFailure(new($"Produto com id [{id}] não foi encontrado.", FailureTypeEnum.NOT_FOUND));
+
+            return Result<Product>.AsSuccess(product);
         }
 
-        public Product Create(Product produto)
+        public Result<Product> Create(Product product)
         {
-            _products.Add(produto);
-            return produto;
+            _products.Add(product);
+            return Result<Product>.AsSuccess(product);
         }
 
-        public void Update(Product produtoAtualizado)
+        public Result<Product> Update(Product updatedProduct)
         {
-            int index = _products.FindIndex(p => p.Id == produtoAtualizado.Id);
-            if (index != -1)
-                _products[index] = produtoAtualizado;
+            int index = _products.FindIndex(p => p.Id == updatedProduct.Id);
+            if (index == -1)
+                return Result<Product>.AsFailure(new($"Produto com id [{updatedProduct.Id}] não foi encontrado.", FailureTypeEnum.NOT_FOUND));
+
+            _products[index] = updatedProduct;
+            return Result<Product>.AsSuccess(_products[index]);
         }
 
-        public void Delete(Guid id)
+        public Result<Product> Delete(Guid id)
         {
-            Product? product = GetById(id);
-            if (product != null)
+            return GetById(id).Bind(product =>
+            {
                 _products.Remove(product);
+                return Result<Product>.AsSuccess(product);
+            });
         }
     }
 }

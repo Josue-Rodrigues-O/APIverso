@@ -1,4 +1,6 @@
-﻿namespace APIverso.Domain.Models
+﻿using System.Security.Cryptography.X509Certificates;
+
+namespace APIverso.Domain.Models
 {
     public class Product
     {
@@ -6,6 +8,13 @@
         public string Description { get; set; }
         public decimal Price { get; set; }
 
+        public Product()
+        {
+            Id = Guid.Empty;
+            Description = string.Empty;
+            Price = decimal.Zero;
+        }
+        
         public Product(string descricao, decimal preco)
         {
             Id = Guid.NewGuid();
