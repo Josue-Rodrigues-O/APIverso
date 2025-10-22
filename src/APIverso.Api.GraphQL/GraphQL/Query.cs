@@ -4,9 +4,9 @@ using APIverso.Domain.Models;
 
 namespace APIverso.Api.GraphQL.GraphQL
 {
-    public class Query
+    public class Query(ProductsService productsService)
     {
-        public IEnumerable<Product> GetAll([Service] ProductsService productsService)
+        public IEnumerable<Product> GetAll()
         {
             var result = productsService.GetAll();
             if (result.IsFailure)
@@ -15,7 +15,7 @@ namespace APIverso.Api.GraphQL.GraphQL
             return result.Success!;
         }
 
-        public Product GetById(Guid id, [Service] ProductsService productsService)
+        public Product GetById(Guid id)
         {
             var result = productsService.GetById(id);
             if (result.IsFailure)

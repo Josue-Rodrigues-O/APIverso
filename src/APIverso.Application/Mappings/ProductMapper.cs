@@ -6,6 +6,6 @@ namespace APIverso.Application.Mappings
     internal static class ProductMapper
     {
         internal static Product ToProduct(this ProductDto productDto)
-            => new(productDto.Descricao, productDto.Preco);
+            => new(productDto.Description, productDto.Price);
     }
 }

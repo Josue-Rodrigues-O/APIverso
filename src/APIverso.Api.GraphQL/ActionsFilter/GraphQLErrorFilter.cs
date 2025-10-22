@@ -1,6 +1,6 @@
 using APIverso.Domain.Exceptions;
 
-namespace APIverso.Api.GraphQL.FilterActions
+namespace APIverso.Api.GraphQL.ActionsFilter
 {
     public class GraphQLErrorFilter : IErrorFilter
     {

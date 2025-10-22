@@ -5,9 +5,9 @@ using APIverso.Domain.Models;
 
 namespace APIverso.Api.GraphQL.GraphQL
 {
-    public class Mutation
+    public class Mutation(ProductsService productsService)
     {
-        public Product Create(ProductDto productDto, [Service] ProductsService productsService)
+        public Product Create(ProductDto productDto)
         {
             var result = productsService.Create(productDto);
             if (result.IsFailure)
@@ -16,7 +16,7 @@ namespace APIverso.Api.GraphQL.GraphQL
             return result.Success!;
         }
 
-        public Product Update(Product product, [Service] ProductsService productsService)
+        public Product Update(Product product)
         {
             var result = productsService.Update(product);
             if (result.IsFailure)
@@ -25,7 +25,7 @@ namespace APIverso.Api.GraphQL.GraphQL
             return result.Success!;
         }
 
-        public Product Delete(Guid id, [Service] ProductsService productsService)
+        public Product Delete(Guid id)
         {
             var result = productsService.Delete(id);
             if (result.IsFailure)

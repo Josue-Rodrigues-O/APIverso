@@ -1,0 +1,21 @@
+type Product {
+    id: ID!
+    description: String!
+    price: Float!
+}
+
+type ProductDto {
+    description: String!
+    price: Float!
+}
+
+type Query {
+    getAll: [Product!]!
+    getById(id: ID!): Product!
+}
+
+type Mutation {
+    create(productDto: ProductDto!): Product!
+    update(product: Product!): Product!
+    delete(id: ID!): Product!
+}
